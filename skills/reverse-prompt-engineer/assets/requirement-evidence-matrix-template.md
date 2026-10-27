@@ -1,29 +1,29 @@
 # Requirement-to-evidence matrix template
 
-Use this only when task complexity justifies explicit traceability. Do not expose every row by default.
+Use this matrix for internal traceability on complex, multi-source or scenario-heavy tasks. Do not show every row to the user by default; summarise it in Reasoning.
 
-| ID | Material requirement / inferred instruction | Evidence category | Exact supporting source or observable clue | Confidence / conflict | Include in reconstructed prompt? |
+| ID | Material requirement or inferred instruction | Evidence class | Exact supporting source or observable clue | Confidence or conflict | In the prompt? |
 |---|---|---|---|---|---|
-| R1 | [requirement] | Explicit / Observed / Strong inference / Weak inference / Unknown / Conflict | [message, file, section, or output feature] | [note] | Yes / No / Placeholder |
+| R1 | [requirement] | Explicit / Observed / Strong inference / Weak inference / Unknown / Conflict | [message, file, section or output feature] | [note] | Yes / No / Placeholder |
 
 ## Coverage summary
 
 - Objective and audience:
 - Inputs and provenance:
 - Contextual requirements preserved:
-- Scenarios, dependencies, and exceptions:
+- Scenarios, dependencies and exceptions:
 - Output contract:
 - Constraints and exclusions:
 - Unknowns and conflicts:
-- Privacy/safety considerations:
-- Items omitted as irrelevant or unsupported:
+- Privacy and safety considerations:
+- Items left out as irrelevant or unsupported:
 
 ## Final pass
 
-- [ ] All material explicit requirements represented.
-- [ ] Earlier requirements retained unless clearly superseded.
-- [ ] Source provenance and important figures preserved.
-- [ ] Inferences not stated as facts.
-- [ ] Conflicts surfaced, not silently combined.
-- [ ] Irrelevant or sensitive details minimized.
-- [ ] Exactly one copy-ready prompt produced.
+- [ ] Every material explicit requirement is represented.
+- [ ] Earlier requirements are kept unless clearly superseded.
+- [ ] Source provenance and important figures are preserved.
+- [ ] Inferences are not stated as facts.
+- [ ] Conflicts are surfaced, not silently combined.
+- [ ] Irrelevant or sensitive details are minimised.
+- [ ] Exactly one copy-ready prompt is produced (unless the user asked for more).
