@@ -36,7 +36,7 @@
           "Rebuild the master prompt from this chat and files",
           "Audit this answer, then reconstruct its prompt"
         ],
-        "websiteURL": "https://github.com/Suraj-Dhal/reverse-prompt-engineer",
+        "websiteURL": "https://surajdhal.com",
         "brandColor": "#FF4D00",
         "composerIcon": "./assets/icon.png",
         "logo": "./assets/icon.png"
