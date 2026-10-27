@@ -1,0 +1,30 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "surajbbsr2007@gmail.com",
+    "name": "SURAJ DHAL"
+  },
+  "description": "Reconstruct one plausible, evidence-led user-level prompt from an existing AI output and relevant context, preserving requirements, source provenance, and uncertainty.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": ["Interactive"],
+        "category": "Productivity",
+        "defaultPrompt": "Reconstruct one plausible, copy-ready user-level prompt from this output and its relevant context. Preserve material requirements and scenario logic, distinguish evidence from inference, and explain uncertainty.",
+        "developerName": "SURAJ DHAL",
+        "displayName": "Reverse Prompt Engineer",
+        "longDescription": "Reconstructs one plausible user-level prompt from an existing output and relevant context. Preserves material requirements and scenario logic, separates evidence from inference, routes relevant domain checks, and explains uncertainty. It does not claim exact recovery of hidden or historical prompts.",
+        "shortDescription": "Reverse prompt builder"
+      }
+    }
+  },
+  "keywords": [
+    "prompt engineering",
+    "reverse prompting",
+    "prompt reconstruction",
+    "evaluation",
+    "context preservation"
+  ],
+  "name": "reverse-prompt-engineer",
+  "version": "0.2.0"
+}

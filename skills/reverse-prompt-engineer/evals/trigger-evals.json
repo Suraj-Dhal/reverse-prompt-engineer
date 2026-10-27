@@ -1,0 +1,146 @@
+[
+  {
+    "id": "T01",
+    "query": "I have an AI-written article. Reconstruct the prompt that likely generated it.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T02",
+    "query": "Reverse engineer a prompt from this report and the brief I uploaded.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T03",
+    "query": "What prompt could have produced this exact style of analysis?",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T04",
+    "query": "Rebuild a master prompt from our long chat, the result, and these source notes.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T05",
+    "query": "Infer the role, constraints, and deliverable instructions behind this output.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T06",
+    "query": "Tell me which of my prompt requirements the answer followed or omitted, then reconstruct the likely prompt.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T07",
+    "query": "Make a prompt that would plausibly recreate this chart and its commentary.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T08",
+    "query": "Reverse-prompt this code sample, including likely runtime requirements.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T09",
+    "query": "Here's the generated image. Infer a likely image-generation prompt from visible details.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T10",
+    "query": "Recover a plausible prompt from these meeting notes and the AI summary they produced.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T11",
+    "query": "I need a traceable reconstruction of the prompt behind this business case study.",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T12",
+    "query": "Can you infer the task prompt from this answer and conversation context?",
+    "expected_trigger": true,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T13",
+    "query": "Rewrite my existing prompt to make it clearer and more effective.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T14",
+    "query": "Explain prompt engineering to a beginner with examples.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T15",
+    "query": "Summarize this report in five bullet points.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T16",
+    "query": "Translate this article into Hindi.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T17",
+    "query": "Fact-check these claims and cite reliable sources.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T18",
+    "query": "Reverse engineer the firmware in this device.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T19",
+    "query": "Write me a new article about electric vehicles; no existing output is supplied.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T20",
+    "query": "Make this prompt shorter but keep the meaning.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T21",
+    "query": "Critique the tone and structure of this essay without inferring a prompt.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T22",
+    "query": "Improve this image prompt: 'a cat in a garden'.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T23",
+    "query": "Give me tips for getting better answers from ChatGPT.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T24",
+    "query": "Explain how this compiled binary works.",
+    "expected_trigger": false,
+    "fixture_type": "synthetic"
+  }
+]
