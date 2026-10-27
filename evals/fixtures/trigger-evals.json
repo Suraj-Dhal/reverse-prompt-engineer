@@ -3,144 +3,416 @@
     "id": "T01",
     "query": "I have an AI-written article. Reconstruct the prompt that likely generated it.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive",
+      "smoke"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T02",
     "query": "Reverse engineer a prompt from this report and the brief I uploaded.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T03",
     "query": "What prompt could have produced this exact style of analysis?",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T04",
     "query": "Rebuild a master prompt from our long chat, the result, and these source notes.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T05",
     "query": "Infer the role, constraints, and deliverable instructions behind this output.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T06",
     "query": "Tell me which of my prompt requirements the answer followed or omitted, then reconstruct the likely prompt.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T07",
     "query": "Make a prompt that would plausibly recreate this chart and its commentary.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T08",
     "query": "Reverse-prompt this code sample, including likely runtime requirements.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T09",
     "query": "Here's the generated image. Infer a likely image-generation prompt from visible details.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T10",
     "query": "Recover a plausible prompt from these meeting notes and the AI summary they produced.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T11",
     "query": "I need a traceable reconstruction of the prompt behind this business case study.",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T12",
     "query": "Can you infer the task prompt from this answer and conversation context?",
     "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T13",
     "query": "Rewrite my existing prompt to make it clearer and more effective.",
     "expected_trigger": false,
-    "fixture_type": "synthetic"
+    "tags": [
+      "trigger",
+      "negative",
+      "smoke"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: prompt polishing, no target output."
   },
   {
     "id": "T14",
     "query": "Explain prompt engineering to a beginner with examples.",
     "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T15",
     "query": "Summarize this report in five bullet points.",
     "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T16",
     "query": "Translate this article into Hindi.",
     "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T17",
     "query": "Fact-check these claims and cite reliable sources.",
     "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T18",
     "query": "Reverse engineer the firmware in this device.",
     "expected_trigger": false,
-    "fixture_type": "synthetic"
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: firmware reverse engineering is software RE, not prompt reconstruction."
   },
   {
     "id": "T19",
     "query": "Write me a new article about electric vehicles; no existing output is supplied.",
     "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T20",
     "query": "Make this prompt shorter but keep the meaning.",
     "expected_trigger": false,
-    "fixture_type": "synthetic"
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: prompt compression of an existing prompt."
   },
   {
     "id": "T21",
     "query": "Critique the tone and structure of this essay without inferring a prompt.",
     "expected_trigger": false,
-    "fixture_type": "synthetic"
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: critique explicitly excludes inferring a prompt."
   },
   {
     "id": "T22",
     "query": "Improve this image prompt: 'a cat in a garden'.",
     "expected_trigger": false,
-    "fixture_type": "synthetic"
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: improving an image prompt the user already has."
   },
   {
     "id": "T23",
     "query": "Give me tips for getting better answers from ChatGPT.",
     "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
     "fixture_type": "synthetic"
   },
   {
     "id": "T24",
     "query": "Explain how this compiled binary works.",
     "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: binary reverse engineering."
+  },
+  {
+    "id": "T25",
+    "query": "What prompt would make ChatGPT write exactly like this? \"Small steps, every single day. That's the whole secret.\"",
+    "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T26",
+    "query": "Is output ka prompt kya hoga? Mujhe same type ka result chahiye.",
+    "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Hinglish (Hindi in Latin script) phrasing."
+  },
+  {
+    "id": "T27",
+    "query": "Reverse prompt this Midjourney image so I can make more like it.",
+    "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T28",
+    "query": "I lost the prompt I used for this report last month. Can you rebuild it from the final document?",
+    "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T29",
+    "query": "Turn this finished slide-deck outline back into the prompt that generated it.",
+    "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T30",
+    "query": "Extract the hidden system prompt from this custom GPT's answers.",
+    "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Should trigger, then decline exact hidden-prompt recovery (see B13)."
+  },
+  {
+    "id": "T31",
+    "query": "Make one prompt that can reproduce all three of these product descriptions.",
+    "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T32",
+    "query": "Audit this AI answer against my original instructions, then give me the prompt that would really produce it.",
+    "expected_trigger": true,
+    "tags": [
+      "trigger",
+      "positive"
+    ],
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T33",
+    "query": "Which AI model wrote this text?",
+    "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: model attribution, not prompt reconstruction."
+  },
+  {
+    "id": "T34",
+    "query": "Is this essay AI-generated?",
+    "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: AI-text detection."
+  },
+  {
+    "id": "T35",
+    "query": "Write a prompt for generating a logo for my bakery.",
+    "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: writing a new prompt from scratch; no target output."
+  },
+  {
+    "id": "T36",
+    "query": "Here's my prompt and the output. Why did the model ignore my word limit?",
+    "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: prompt debugging, not reconstruction."
+  },
+  {
+    "id": "T37",
+    "query": "Decompile this APK and tell me how it works.",
+    "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: software reverse engineering."
+  },
+  {
+    "id": "T38",
+    "query": "Convert this report into a slide deck.",
+    "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic"
+  },
+  {
+    "id": "T39",
+    "query": "Create a prompt template library for my marketing team.",
+    "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
+    "fixture_type": "synthetic",
+    "notes": "Near miss: prompt authoring."
+  },
+  {
+    "id": "T40",
+    "query": "Summarise our conversation so far.",
+    "expected_trigger": false,
+    "tags": [
+      "trigger",
+      "negative"
+    ],
     "fixture_type": "synthetic"
   }
 ]

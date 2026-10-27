@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Suraj-Dhal/reverse-prompt-engineer/evals/fixtures/schema/reconstruction-evals.schema.json",
+  "title": "Reverse Prompt Engineer behavioural fixtures",
+  "description": "Runnable scenarios with expectations; compiled into a claude plugin eval suite by scripts/build_evals.py.",
+  "type": "array",
+  "minItems": 25,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id", "title", "category", "tags", "critical", "contract", "prompt", "input",
+      "context_available", "must_preserve", "expected_output", "prohibited", "pass_fail", "fixture_type"
+    ],
+    "$defs": {
+      "nonEmptyStrings": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    },
+    "properties": {
+      "id": { "type": "string", "pattern": "^B[0-9]{2,3}$" },
+      "title": { "type": "string", "minLength": 3 },
+      "category": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" },
+        "contains": { "const": "behavior" },
+        "uniqueItems": true
+      },
+      "critical": { "type": "boolean", "description": "A failure here is release-blocking." },
+      "contract": { "type": "boolean", "description": "Whether the two-section response contract applies (false for safety refusals)." },
+      "require_skill": { "type": "boolean", "default": true, "description": "Whether the case requires the skill to be invoked (false when only safe behaviour matters)." },
+      "rubric": { "type": "boolean", "default": true, "description": "Whether to add the LLM-judge rubric grader (false when judges refuse to grade the content; use regex graders instead)." },
+      "prompt": { "type": "string", "minLength": 40, "description": "The exact, self-contained message sent to the model." },
+      "input": { "type": "string", "minLength": 1, "description": "One-line summary of the scenario." },
+      "context_available": { "type": "string", "minLength": 1 },
+      "must_preserve": { "$ref": "#/items/$defs/nonEmptyStrings" },
+      "expected_output": { "$ref": "#/items/$defs/nonEmptyStrings" },
+      "prohibited": { "$ref": "#/items/$defs/nonEmptyStrings" },
+      "pass_fail": { "$ref": "#/items/$defs/nonEmptyStrings" },
+      "graders": {
+        "type": "array",
+        "description": "Extra deterministic regex graders, applied to the final message.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "type", "pattern", "match"],
+          "properties": {
+            "name": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+            "type": { "const": "regex" },
+            "pattern": { "type": "string", "minLength": 1, "description": "JavaScript regular expression." },
+            "flags": { "type": "string", "pattern": "^[gimsuy]*$" },
+            "match": { "type": "string", "pattern": "^(contains|not_contains|count:[0-9]+)$" }
+          }
+        }
+      },
+      "fixture_type": { "const": "synthetic" }
+    }
+  }
+}
