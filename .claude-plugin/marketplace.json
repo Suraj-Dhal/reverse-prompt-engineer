@@ -1,0 +1,18 @@
+{
+  "name": "suraj-dhal",
+  "description": "Plugins by Suraj Dhal.",
+  "owner": {
+    "name": "Suraj Dhal",
+    "email": "surajbbsr2007@gmail.com",
+    "url": "https://github.com/Suraj-Dhal"
+  },
+  "plugins": [
+    {
+      "name": "reverse-prompt-engineer",
+      "source": "./",
+      "description": "Reconstruct one plausible, evidence-led, copy-ready prompt from an existing AI output and its context, preserving requirements, provenance and uncertainty.",
+      "category": "productivity",
+      "tags": ["prompt-engineering", "reverse-prompting", "evaluation"]
+    }
+  ]
+}

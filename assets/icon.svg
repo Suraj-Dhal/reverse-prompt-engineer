@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect x="0" y="0" width="1024" height="1024" rx="224" fill="#101012"/>
+  <!-- counter-clockwise "reverse" arc -->
+  <path d="M 724 300 A 300 300 0 1 0 812 540" fill="none" stroke="#FF4D00" stroke-width="64" stroke-linecap="round"/>
+  <!-- arrowhead at the arc end, pointing counter-clockwise (reverse) -->
+  <polygon points="812,392 730,532 894,532" fill="#FF4D00" stroke="#FF4D00" stroke-width="12" stroke-linejoin="round"/>
+  <!-- prompt glyph -->
+  <polyline points="372,420 476,512 372,604" fill="none" stroke="#F4F4F5" stroke-width="56" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="516" y1="616" x2="652" y2="616" stroke="#F4F4F5" stroke-width="56" stroke-linecap="round"/>
+</svg>

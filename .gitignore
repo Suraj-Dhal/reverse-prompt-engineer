@@ -1,0 +1,19 @@
+# Build output
+dist/
+
+# claude plugin eval run output (reports, transcripts, recordings)
+evals/results/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

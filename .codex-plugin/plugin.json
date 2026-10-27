@@ -1,28 +1,42 @@
 {
+  "name": "reverse-prompt-engineer",
+  "version": "1.0.0",
+  "description": "Reconstruct one plausible, evidence-led, copy-ready prompt from an existing AI output and its context, preserving requirements, provenance and uncertainty.",
+  "author": {
+    "name": "Suraj Dhal",
+    "email": "surajbbsr2007@gmail.com",
+    "url": "https://surajdhal.com"
+  },
+  "homepage": "https://github.com/Suraj-Dhal/reverse-prompt-engineer#readme",
+  "repository": "https://github.com/Suraj-Dhal/reverse-prompt-engineer",
+  "license": "MIT",
+  "keywords": [
+    "prompt-engineering",
+    "reverse-prompting",
+    "prompt-reconstruction",
+    "prompt-audit",
+    "context-preservation",
+    "agent-skills",
+    "evaluation"
+  ],
+  "skills": "./skills/",
   "interface": {
+    "displayName": "Reverse Prompt Engineer",
+    "shortDescription": "Rebuild prompts from outputs",
+    "longDescription": "Reverse Prompt Engineer reconstructs one plausible, copy-ready user-level prompt from an existing output (a report, article, analysis, code sample, image, website or design) together with any conversation history and files you supply. It keeps material requirements, figures, scenarios and conditional logic; separates explicit evidence from observation and inference; flags conflicts and inaccessible sources; and states an overall confidence level. It can also audit which of your original instructions an output followed, reconstruct one shared prompt for several outputs, or suggest clearly labelled improvements. Intended for writers, analysts, developers, marketers and educators who need to reproduce or document how an AI result was made. Limitations: it cannot recover an exact historical prompt or any hidden system prompt, cannot identify the model or settings used, and does not verify facts or citations unless you ask and a browsing tool is available.",
+    "developerName": "Suraj Dhal",
+    "category": "Productivity",
     "capabilities": [
       "Interactive"
     ],
-    "category": "Productivity",
-    "defaultPrompt": "Reconstruct one plausible, copy-ready user-level prompt from this output and its relevant context. Preserve material requirements and scenario logic, distinguish evidence from inference, and explain uncertainty.",
-    "developerName": "SURAJ DHAL",
-    "displayName": "Reverse Prompt Engineer",
-    "longDescription": "Reconstructs one plausible user-level prompt from an existing output and relevant context. Preserves material requirements and scenario logic, separates evidence from inference, routes relevant domain checks, and explains uncertainty. It does not claim exact recovery of hidden or historical prompts.",
-    "shortDescription": "Reverse prompt builder"
-  },
-  "name": "reverse-prompt-engineer",
-  "version": "0.2.0",
-  "description": "Reconstruct one plausible, evidence-led user-level prompt from an existing AI output and relevant context, preserving requirements, source provenance, and uncertainty.",
-  "author": {
-    "name": "SURAJ DHAL",
-    "email": "surajbbsr2007@gmail.com"
-  },
-  "keywords": [
-    "prompt engineering",
-    "reverse prompting",
-    "prompt reconstruction",
-    "evaluation",
-    "context preservation"
-  ],
-  "skills": "./skills"
+    "defaultPrompt": [
+      "What prompt produced this output?",
+      "Rebuild the master prompt from this chat and files",
+      "Audit this answer, then reconstruct its prompt"
+    ],
+    "websiteURL": "https://github.com/Suraj-Dhal/reverse-prompt-engineer",
+    "brandColor": "#FF4D00",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
 }
