@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: "1"
+
+jobs:
+  validate:
+    name: Validate and test (${{ matrix.os }}, Python ${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, python: "3.9" }
+          - { os: ubuntu-latest, python: "3.13" }
+          - { os: windows-latest, python: "3.13" }
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install optional test dependency
+        run: python -m pip install --disable-pip-version-check jsonschema
+
+      - name: Structural validation
+        run: python scripts/validate.py --verbose
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Generated eval suite is in sync with fixtures
+        run: python scripts/build_evals.py --check
+
+      - name: Worked examples meet the response contract
+        run: python scripts/lint_response.py --examples skills/reverse-prompt-engineer/references/worked-examples.md --strict
+
+      - name: Build release archives
+        run: python scripts/package.py
+
+  claude-validate:
+    name: claude plugin validate --strict
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Claude Code
+        run: npm install --global --no-fund --no-audit @anthropic-ai/claude-code
+
+      - name: Validate plugin
+        run: claude plugin validate . --strict
+
+      - name: Validate marketplace
+        run: claude plugin validate .claude-plugin/marketplace.json --strict

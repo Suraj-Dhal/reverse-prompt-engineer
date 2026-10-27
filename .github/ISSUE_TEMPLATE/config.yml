@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/Suraj-Dhal/reverse-prompt-engineer/security/advisories/new
+    about: Report security issues privately (see SECURITY.md).
+  - name: Usage questions
+    url: https://github.com/Suraj-Dhal/reverse-prompt-engineer/blob/main/docs/usage.md
+    about: Read the usage guide first; it covers most questions.

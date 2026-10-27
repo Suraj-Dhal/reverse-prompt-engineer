@@ -1,0 +1,45 @@
+name: Bug report
+description: Something in the plugin, its manifests, scripts or docs is broken.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. For **reconstruction quality** problems (a wrong or weak prompt), use the *Behaviour report* template instead. For **security** issues, follow [SECURITY.md](https://github.com/Suraj-Dhal/reverse-prompt-engineer/blob/main/SECURITY.md) and do not open a public issue.
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: host
+    attributes:
+      label: Host
+      options:
+        - Claude Code
+        - OpenAI Codex / ChatGPT desktop
+        - Claude.ai / Claude apps (skill upload)
+        - Other Agent Skills / Agent Plugins host
+        - Not applicable (repository tooling)
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include exact commands and full error output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, host version (e.g. `claude --version`), Python version for scripts.

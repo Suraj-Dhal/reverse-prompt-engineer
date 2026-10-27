@@ -1,0 +1,77 @@
+name: Live evals
+
+# Runs the behavioural suite against a real model. It costs money, so it only
+# runs when started by hand (Actions tab -> Live evals -> Run workflow).
+# Requires a repository secret named ANTHROPIC_API_KEY.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Case tag to run: smoke, critical, trigger, behavior, or all"
+        required: true
+        default: smoke
+        type: choice
+        options: [smoke, critical, trigger, behavior, all]
+      runs:
+        description: "Runs per case"
+        required: true
+        default: "1"
+      max_cost_usd:
+        description: "Hard cost ceiling in USD"
+        required: true
+        default: "5"
+      baseline:
+        description: "Also run without the plugin to measure its effect (doubles cost)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      EVAL_TAG: ${{ inputs.tag }}
+      EVAL_RUNS: ${{ inputs.runs }}
+      EVAL_MAX_COST: ${{ inputs.max_cost_usd }}
+      EVAL_BASELINE: ${{ inputs.baseline }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for API key
+        run: |
+          if [ -z "${ANTHROPIC_API_KEY}" ]; then
+            echo "::error::Add a repository secret named ANTHROPIC_API_KEY (Settings -> Secrets and variables -> Actions)."
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Claude Code
+        run: npm install --global --no-fund --no-audit @anthropic-ai/claude-code
+
+      - name: Run evals
+        run: |
+          case "${EVAL_RUNS}" in ''|*[!0-9]*) echo "::error::runs must be a number"; exit 1;; esac
+          ablation=none
+          if [ "${EVAL_BASELINE}" = "true" ]; then ablation=with-without; fi
+          args=(. --trust-plugin --no-publish --runs "${EVAL_RUNS}" --ablation "${ablation}"
+                --max-cost-usd "${EVAL_MAX_COST}" --judge-model sonnet --threshold 0.8 --json results.json)
+          if [ "${EVAL_TAG}" != "all" ]; then args+=(--tag "${EVAL_TAG}"); fi
+          claude plugin eval "${args[@]}"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: |
+            results.json
+            evals/results/
+          if-no-files-found: ignore

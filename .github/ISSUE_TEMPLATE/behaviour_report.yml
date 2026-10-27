@@ -1,0 +1,56 @@
+name: Behaviour report
+description: The skill produced a wrong, weak or non-compliant reconstruction, or did (not) activate when it should (not) have.
+labels: ["behaviour"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Good behaviour reports become regression cases in `evals/fixtures/`. Please use **synthetic or anonymised** material only: no real personal data.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of problem
+      options:
+        - Skill did not activate when it should have
+        - Skill activated when it should not have
+        - Response broke the output contract (sections, prompt block, placeholders, confidence)
+        - Lost or distorted a requirement, figure or scenario
+        - Invented facts, sources, tool use or access
+        - Safety or privacy concern (non-security)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Exact input
+      description: The full message you sent, including the target output.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Response you got
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What a correct response would do
+    validations:
+      required: true
+  - type: input
+    id: host
+    attributes:
+      label: Host, model and plugin version
+      placeholder: "Claude Code 2.1.311, default model, plugin 1.0.0"
+    validations:
+      required: true
+  - type: textarea
+    id: lint
+    attributes:
+      label: Linter output (optional)
+      description: Save the response to a file and run `python3 scripts/lint_response.py response.md`.
+      render: text
