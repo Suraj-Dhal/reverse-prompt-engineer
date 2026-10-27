@@ -1,56 +1,111 @@
 name: Release
 
+# Release on version bump. When main carries a plugin.json version that has no
+# v<version> tag yet, this workflow validates the commit, creates the tags
+# (v<version> and Claude Code's reverse-prompt-engineer--v<version>), builds the
+# archives and publishes the GitHub release. Pushing a v*.*.* tag yourself also
+# works. Every step is idempotent, so re-running is safe.
+
 on:
   push:
+    branches: [main]
     tags: ["v*.*.*"]
+  workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 env:
   PYTHONUTF8: "1"
+  GH_TOKEN: ${{ github.token }}
 
 jobs:
   release:
-    name: Build and publish ${{ github.ref_name }}
+    name: Tag and publish
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.13"
 
-      - name: Tag must match the manifest version
+      - name: Configure git identity for tags
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Back-fill historical tags and releases
+        run: |
+          # Each line of .github/release-history.txt: <tag> <commit-sha> <release title...>
+          [ -f .github/release-history.txt ] || exit 0
+          grep -v '^\s*#' .github/release-history.txt | while read -r tag sha title; do
+            [ -n "$tag" ] || continue
+            if ! git rev-parse -q --verify "refs/tags/${tag}" > /dev/null; then
+              git tag -a "${tag}" "${sha}" -m "${title}"
+              git push origin "refs/tags/${tag}"
+            fi
+            if ! gh release view "${tag}" > /dev/null 2>&1; then
+              git archive --format=zip --prefix=reverse-prompt-engineer/ -o "reverse-prompt-engineer-${tag#v}-original.zip" "${tag}"
+              gh release create "${tag}" "reverse-prompt-engineer-${tag#v}-original.zip" \
+                --title "${title}" --latest=false --verify-tag \
+                --notes "Historical release, preserved for auditability. See [CHANGELOG.md](https://github.com/${GITHUB_REPOSITORY}/blob/main/CHANGELOG.md) and the [engineering review](https://github.com/${GITHUB_REPOSITORY}/blob/main/docs/review-v0.2.0.md)."
+            fi
+          done
+
+      - name: Determine version
+        id: version
         run: |
           version="$(python -c "import json; print(json.load(open('plugin.json'))['version'])")"
-          if [ "v${version}" != "${GITHUB_REF_NAME}" ]; then
+          tag="v${version}"
+          if [ "${GITHUB_REF_TYPE}" = "tag" ] && [ "${GITHUB_REF_NAME}" != "${tag}" ]; then
             echo "::error::Tag ${GITHUB_REF_NAME} does not match plugin.json version ${version}"
             exit 1
           fi
+          if git rev-parse -q --verify "refs/tags/${tag}" > /dev/null; then tagged=true; else tagged=false; fi
+          if gh release view "${tag}" > /dev/null 2>&1; then released=true; else released=false; fi
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "tagged=${tagged}" >> "$GITHUB_OUTPUT"
+          echo "released=${released}" >> "$GITHUB_OUTPUT"
+          echo "Version ${version}: tagged=${tagged}, released=${released}"
 
       - name: Validate and test
+        if: steps.version.outputs.released != 'true'
         run: |
           python -m pip install --disable-pip-version-check jsonschema
           python scripts/validate.py
           python -m unittest discover -s tests
 
-      - name: Build archives
-        run: python scripts/package.py
-
-      - name: Release notes from CHANGELOG
-        run: python scripts/release_notes.py "${GITHUB_REF_NAME}" > release-notes.md
-
-      - name: Publish GitHub release
+      - name: Create tags
+        if: steps.version.outputs.tagged != 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+          TAG: ${{ steps.version.outputs.tag }}
         run: |
-          if gh release view "${GITHUB_REF_NAME}" > /dev/null 2>&1; then
-            gh release upload "${GITHUB_REF_NAME}" dist/* --clobber
-            gh release edit "${GITHUB_REF_NAME}" --notes-file release-notes.md
-          else
-            gh release create "${GITHUB_REF_NAME}" dist/* \
-              --title "Reverse Prompt Engineer ${GITHUB_REF_NAME}" \
-              --notes-file release-notes.md \
-              --verify-tag
-          fi
+          git tag -a "${TAG}" -m "Reverse Prompt Engineer ${TAG}"
+          plugin_tag="reverse-prompt-engineer--v${VERSION}"
+          git rev-parse -q --verify "refs/tags/${plugin_tag}" > /dev/null || git tag -a "${plugin_tag}" -m "reverse-prompt-engineer ${VERSION}"
+          git push origin "refs/tags/${TAG}" "refs/tags/${plugin_tag}"
+
+      - name: Build archives and notes
+        if: steps.version.outputs.released != 'true'
+        run: |
+          python scripts/package.py
+          python scripts/release_notes.py "${{ steps.version.outputs.version }}" > release-notes.md
+
+      - name: Publish release
+        if: steps.version.outputs.released != 'true'
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          gh release create "${TAG}" dist/* \
+            --title "Reverse Prompt Engineer ${TAG}" \
+            --notes-file release-notes.md \
+            --latest --verify-tag

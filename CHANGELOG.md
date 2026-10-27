@@ -28,7 +28,7 @@ First stable release, following a full engineering review of v0.2.0. Every findi
 - `scripts/package.py`, reproducible plugin and skill-upload ZIPs with SHA-256 checksums.
 - `scripts/bump_version.py`, which sets a new version everywhere it is recorded in one step.
 - Unit tests (standard-library `unittest`), including regressions for each v0.2.0 validator bug.
-- GitHub Actions: CI (validation, tests, `claude plugin validate --strict`, packaging) on Linux and Windows; a tag-triggered release workflow; a manually triggered live-eval workflow.
+- GitHub Actions: CI (validation, tests, `claude plugin validate --strict`, packaging) on Linux and Windows; a release-on-version-bump workflow that creates the tags and the GitHub release (and back-fills the v0.2.0 baseline); a manually triggered live-eval workflow.
 - MIT `LICENSE`; the documentation set (`docs/`: how it works, installation, usage, evaluation, licensing, review); `CONTRIBUTING.md`; `SECURITY.md`; issue and PR templates; an original icon.
 
 ### Changed

@@ -62,14 +62,8 @@ Use the imperative mood with a short summary line: `Add audit-mode table check t
 1. `python3 scripts/bump_version.py X.Y.Z`. This updates every manifest and the `SKILL.md` metadata, and turns `[Unreleased]` into a dated section.
 2. Edit the new CHANGELOG section and add the compare link.
 3. `python3 scripts/validate.py && python3 -m unittest discover -s tests && claude plugin validate . --strict`
-4. Commit: `Release vX.Y.Z`.
-5. Tag and push:
-   ```bash
-   git tag -a vX.Y.Z -m "vX.Y.Z"
-   claude plugin tag . -m "reverse-prompt-engineer %s"   # creates reverse-prompt-engineer--vX.Y.Z
-   git push origin main --tags
-   ```
-6. The **Release** workflow builds the ZIPs and checksums and publishes the GitHub release with the CHANGELOG notes.
+4. Commit (`Release vX.Y.Z`) and push to `main`, through a pull request or directly.
+5. The **Release** workflow notices that `plugin.json` has a version with no tag yet. It validates and tests the commit, creates the annotated tags `vX.Y.Z` and `reverse-prompt-engineer--vX.Y.Z` (Claude Code's plugin release tag, used for dependency version ranges), builds the ZIPs and checksums, and publishes the GitHub release with the CHANGELOG notes. Pushing a `vX.Y.Z` tag yourself also works; the workflow is idempotent.
 
 ## Licence of contributions
 
