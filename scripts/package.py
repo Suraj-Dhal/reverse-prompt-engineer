@@ -7,8 +7,10 @@ Creates, in dist/:
                                                  (for example Claude.ai > Settings > Capabilities)
   SHA256SUMS.txt                                 checksums for both archives
 
-Archives are byte-for-byte reproducible: entries are sorted and carry fixed
-timestamps and permissions, so the same commit always yields the same hashes.
+Archives are reproducible: entries are sorted and carry fixed timestamps and
+permissions, so the same commit always yields identical file contents. The
+compressed bytes (and so the checksums) are identical when built with the same
+Python/zlib version, as in CI; other zlib versions may compress slightly differently.
 
 Usage:
     python3 scripts/package.py [--out dist]

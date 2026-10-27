@@ -43,7 +43,7 @@ python3 -m unittest discover -s tests -v
 python3 scripts/lint_response.py --examples skills/reverse-prompt-engineer/references/worked-examples.md --strict
 ```
 
-The tests cover the validator (including one regression test per v0.2.0 bug: the literal `\n`, the crash on a missing manifest, links in code fences, orphaned playbooks, version drift, the over-long Codex starter prompt), the linter, the eval builder, packaging (contents and byte-for-byte reproducibility) and version bumps. CI runs them on Ubuntu (Python 3.9 and 3.13) and Windows (Python 3.13).
+The tests cover the validator (including one regression test per v0.2.0 bug: the literal `\n`, the crash on a missing manifest, links in code fences, orphaned playbooks, version drift, the over-long Codex starter prompt), the linter, the eval builder, packaging (archive contents, and byte-for-byte reproducibility on the same Python/zlib build) and version bumps. CI runs them on Ubuntu (Python 3.9 and 3.13) and Windows (Python 3.13).
 
 ### Linting your own responses
 
